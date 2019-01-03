@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const passport = require("passport");
 
 const app = express();
 
@@ -18,6 +19,9 @@ app.use(
     extended: true
   })
 );
+
+//Passport Setup
+require("./config/passport");
 
 //Configuration
 
