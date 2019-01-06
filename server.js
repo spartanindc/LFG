@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const passport = require("passport");
+const session = require("express-session");
 
 const app = express();
 
@@ -21,7 +22,13 @@ app.use(
 );
 
 //Passport Setup
-require("./config/passport");
+require("./config/passport")(passport);
+app.use(session({ secret: "operationcantwaitanylonger" }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+const auth = require("./config/auth");
+//app.use("/auth", auth);
 
 //Configuration
 
@@ -29,11 +36,7 @@ const configDB = require("./config/database.js");
 mongoose.connect(configDB.url);
 
 //Routing
-
-//Placeholder route
-app.get("*", (req, res) => {
-  res.json({ message: "Bonjour World!" });
-});
+require("./api/routes/routes.js")(app, passport);
 
 app.listen(port);
 console.log("Server is running at " + port);

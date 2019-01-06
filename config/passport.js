@@ -1,7 +1,6 @@
 "use strict";
 
 // load all the things we need
-const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
@@ -32,12 +31,12 @@ module.exports = function(passport) {
     "local-signup",
     new LocalStrategy(
       {
-        usernameField: "username",
         emailField: "email",
         passwordField: "password",
+        usernameField: "email",
         passReqToCallback: true
       },
-      function(req, username, email, password, done) {
+      function(req, email, password, done) {
         // asynchronous
         // User.findOne will not fire unless data is sent back
         process.nextTick(function() {
@@ -49,23 +48,21 @@ module.exports = function(passport) {
 
             // check to see if theres already a user with that email
             if (user) {
-              return done(
-                null,
-                false,
-                req.flash("signupMessage", "That email is already in use.")
-              );
+              return done(null, false);
             } else {
               // if there is no user with that email, create the user
               const newUser = new User();
 
               // set the user's local credentials
-              newUser.local.username = username;
+              newUser.local.username = req.body.username;
               newUser.local.email = email;
               newUser.local.password = newUser.generateHash(password);
 
               // save the user
               newUser.save(function(err) {
-                if (err) throw err;
+                if (err) {
+                  console.log(err);
+                }
                 return done(null, newUser);
               });
             }
@@ -78,25 +75,43 @@ module.exports = function(passport) {
   // LOCAL LOGIN
 
   passport.use(
+    "local-login",
     new LocalStrategy(
       {
-        usernameField: "email" || "username",
-        passwordField: "password"
+        usernameField: "email",
+        passwordField: "password",
+        passReqToCallback: true
       },
-      function(email, password, cb) {
-        //this one is typically a DB call. Assume that the returned user object is pre-formatted and ready for storing in JWT
-        return User.findOne({ email, password })
-          .then(user => {
-            if (!user) {
-              return cb(null, false, {
-                message: "Incorrect email or password.  Try again or signup."
-              });
-            }
-            return cb(null, user, {
-              message: "Credentials confirmed -- Login successful"
-            });
-          })
-          .catch(err => cb(err));
+      // callback with email and password from our form
+      function(req, email, password, done) {
+        // find a user whose email is the same as the form's email
+        // check to see if the user trying to login already exists
+        User.findOne({ "local.email": email }, function(err, user) {
+          // if there are any errors, return the error before anything else
+          if (err) return done(err);
+
+          // if no user is found, return the message
+          if (!user)
+            return done(
+              null,
+              false,
+              req.flash(
+                "loginMessage",
+                "No user found. Please try again or create an account"
+              )
+            );
+
+          // if the user is found but the password is wrong
+          if (!user.validPassword(password))
+            return done(
+              null,
+              false,
+              req.flash("loginMessage", "Oops! Wrong password.")
+            );
+
+          // all is well, return successful user
+          return done(null, user);
+        });
       }
     )
   );
