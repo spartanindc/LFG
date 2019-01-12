@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 const sessionSchema = mongoose.Schema({
   sessionTitle: String,
-  gameToBePlayed: String,
+  gameToBePlayed: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
   playersNeeded: Number,
   playersCommitted: Number,
   description: String,
@@ -17,11 +17,11 @@ sessionSchema.methods.serialize = function() {
 };
 
 sessionSchema.pre("find", function() {
-  this.populate("user");
+  this.populate("game");
 });
 
 sessionSchema.pre("findOne", function() {
-  this.populate("user");
+  this.populate("game");
 });
 
 const Session = mongoose.model("Session", sessionSchema);
