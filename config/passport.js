@@ -2,9 +2,6 @@
 
 // load all the things we need
 const LocalStrategy = require("passport-local").Strategy;
-const passportJWT = require("passport-jwt");
-const JWTStrategy = passportJWT.Strategy;
-const ExtractJWT = passportJWT.ExtractJwt;
 
 // load up the user model
 const User = require("../api/models/user");
@@ -48,7 +45,11 @@ module.exports = function(passport) {
 
             // check to see if theres already a user with that email
             if (user) {
-              return done(null, false);
+              return done(
+                null,
+                false,
+                req.flash("signupMessage", "That email is already in use.")
+              );
             } else {
               // if there is no user with that email, create the user
               const newUser = new User();
@@ -91,10 +92,23 @@ module.exports = function(passport) {
           if (err) return done(err);
 
           // if no user is found, return the message
-          if (!user) return done(null, false);
+          if (!user)
+            return done(
+              null,
+              false,
+              req.flash(
+                "loginMessage",
+                "No user found. Please try again or create an account"
+              )
+            );
 
           // if the user is found but the password is wrong
-          if (!user.validPassword(password)) return done(null, false);
+          if (!user.validPassword(password))
+            return done(
+              null,
+              false,
+              req.flash("loginMessage", "Oops! Wrong password.")
+            );
 
           // all is well, return successful user
           return done(null, user);
@@ -102,28 +116,4 @@ module.exports = function(passport) {
       }
     )
   );
-
-  //JWT Strategy
-
-  /*
-
-  passport.use(
-    new JWTStrategy(
-      {
-        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-        secretOrKey: "your_jwt_secret"
-      },
-      function(jwtPayload, cb) {
-        //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
-        return User.findOneById(jwtPayload.id)
-          .then(user => {
-            return cb(null, user);
-          })
-          .catch(err => {
-            return cb(err);
-          });
-      }
-    )
-  );
-  */
 };

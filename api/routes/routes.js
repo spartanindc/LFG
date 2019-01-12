@@ -15,7 +15,7 @@ module.exports = (app, passport) => {
     "/login",
     passport.authenticate("local-login", {
       successRedirect: "/login", // redirect to the secure profile section
-      failureRedirect: "/login" // redirect back to the signup page if there is an error
+      failureRedirect: "/signup" // redirect back to the signup page if there is an error
     })
   );
 
@@ -44,7 +44,7 @@ module.exports = (app, passport) => {
   });
 
   //CREATE game
-  app.post("/games", (req, res) => {
+  app.post("/games", isLoggedIn, (req, res) => {
     let newGame = req.body;
     newGame.user = req.user; //"" + req.user._id + "";
     Game.create(newGame, function(err, game) {
@@ -58,7 +58,7 @@ module.exports = (app, passport) => {
 
   //UPDATE game
 
-  app.post("/games/:id", (req, res) => {
+  app.post("/games/:id", isLoggedIn, (req, res) => {
     //Ensure valid request to update
     const requiredFields = [
       "gameTitle",
@@ -109,7 +109,7 @@ module.exports = (app, passport) => {
   });
 
   //DELETE game
-  app.delete("/games/:id", (req, res) => {
+  app.delete("/games/:id", isLoggedIn, (req, res) => {
     Game.findOneAndRemove({ _id: req.params.id }).then(() => {
       console.log(`deleted game with id \`${req.params.id}\``);
       res.status(204).end();
@@ -126,7 +126,7 @@ module.exports = (app, passport) => {
   });
 
   //CREATE game session
-  app.post("/sessions", (req, res) => {
+  app.post("/sessions", isLoggedIn, (req, res) => {
     let newGameSession = req.body;
     newGameSession.user = req.user; //"" + req.user._id + "";
     Session.create(newGameSession, function(err, session) {
@@ -143,7 +143,7 @@ module.exports = (app, passport) => {
 
   //UPDATE game session
 
-  app.post("/sessions/:id", (req, res) => {
+  app.post("/sessions/:id", isLoggedIn, (req, res) => {
     //Ensure valid request to update
     const requiredFields = [
       "sessionTitle",
@@ -198,10 +198,19 @@ module.exports = (app, passport) => {
   });
 
   //DELETE game session
-  app.delete("/sessions/:id", (req, res) => {
+  app.delete("/sessions/:id", isLoggedIn, (req, res) => {
     Session.findOneAndRemove({ _id: req.params.id }).then(() => {
       console.log(`deleted game session with id \`${req.params.id}\``);
       res.status(204).end();
     });
   });
 };
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+  // if user is authenticated in the session, carry on
+  if (req.isAuthenticated()) return next();
+
+  // if they aren't redirect them to the home page
+  res.redirect("/login");
+}

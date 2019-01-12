@@ -1,23 +1,30 @@
 import React, { Component } from "react";
-import logo from "../logo.svg";
+import { Link } from "react-router-dom";
 import "../App.css";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>It works!</p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <div className="container">
+          <div className="center-align title">
+            <h1>Looking for Gamers</h1>
+          </div>
+          <div className="">
+            <p>
+              Is your personal boardgame collection extensive, but your friends
+              willing to play for 6 hours no-so-large? Find new, better,
+              boardgaming friends with LFG!
+            </p>
+          </div>
+          <Link to={"/login"}>Login</Link>
+          <br />
+          <Link to={"/signup"}>Signup</Link>
+        </div>
+        <footer role="contentinfo">
+          <p>Created by David Alim</p>
+          <a href="https://github.com/spartanindc/LFG">Github Repo</a>
+        </footer>
       </div>
     );
   }

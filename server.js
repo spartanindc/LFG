@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const passport = require("passport");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 const app = express();
 
@@ -26,9 +27,7 @@ require("./config/passport")(passport);
 app.use(session({ secret: "operationcantwaitanylonger" }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-const auth = require("./config/auth");
-//app.use("/auth", auth);
+app.use(flash());
 
 //Configuration
 
