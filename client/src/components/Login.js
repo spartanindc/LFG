@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Login extends Component {
   render() {
@@ -38,10 +39,10 @@ class Login extends Component {
               <br />
 
               <p>
-                Need an account? <a href="/signup">Signup</a>
+                Need an account? <Link to={"/signup"}>Sign up.</Link>
               </p>
               <p>
-                Or return <a href="/">home</a>.
+                Or return <Link to={"/"}>to the beginning.</Link>
               </p>
             </div>
           </div>
