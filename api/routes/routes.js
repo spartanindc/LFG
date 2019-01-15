@@ -14,7 +14,7 @@ module.exports = (app, passport) => {
   app.post(
     "/login",
     passport.authenticate("local-login", {
-      successRedirect: "/login", // redirect to the secure profile section
+      successRedirect: "/:username", // redirect to the secure profile section
       failureRedirect: "/signup" // redirect back to the signup page if there is an error
     })
   );
@@ -29,7 +29,7 @@ module.exports = (app, passport) => {
   app.post(
     "/signup",
     passport.authenticate("local-signup", {
-      successRedirect: "/signup", // redirect to the secure profile section
+      successRedirect: "/login", // redirect to the secure profile section
       failureRedirect: "/signup" // redirect back to the signup page if there is an error
     })
   );
@@ -43,8 +43,15 @@ module.exports = (app, passport) => {
     });
   });
 
+  //GET a specific game
+  app.get("/games/:id", (req, res) => {
+    Game.findById(req.params.id, function(err, game) {
+      res.json(game.serialize());
+    });
+  });
+
   //CREATE game
-  app.post("/games", isLoggedIn, (req, res) => {
+  app.post("/games", (req, res) => {
     let newGame = req.body;
     newGame.user = req.user; //"" + req.user._id + "";
     Game.create(newGame, function(err, game) {
@@ -58,7 +65,7 @@ module.exports = (app, passport) => {
 
   //UPDATE game
 
-  app.post("/games/:id", isLoggedIn, (req, res) => {
+  app.post("/games/:id", (req, res) => {
     //Ensure valid request to update
     const requiredFields = [
       "gameTitle",
@@ -125,8 +132,15 @@ module.exports = (app, passport) => {
     });
   });
 
+  //GET a specific game session
+  app.get("/sessions/:id", (req, res) => {
+    Session.findById(req.params.id, function(err, session) {
+      res.json(session.serialize());
+    });
+  });
+
   //CREATE game session
-  app.post("/sessions", isLoggedIn, (req, res) => {
+  app.post("/sessions", (req, res) => {
     let newGameSession = req.body;
     newGameSession.user = req.user; //"" + req.user._id + "";
     Session.create(newGameSession, function(err, session) {
@@ -203,6 +217,14 @@ module.exports = (app, passport) => {
       console.log(`deleted game session with id \`${req.params.id}\``);
       res.status(204).end();
     });
+  });
+
+  //DASHBOARD
+
+  // GET Dashboard
+
+  app.get("/:username", (req, res) => {
+    res.json({ message: "It Works" });
   });
 };
 

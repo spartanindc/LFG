@@ -1,7 +1,7 @@
 {
   "name": "LFG",
   "version": "1.0.0",
-  "description": "---\r App to boardgamers to play with you",
+  "description": "---\r App to find boardgamers to play with you",
   "main": "server.js",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",

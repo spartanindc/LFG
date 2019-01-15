@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 const sessionSchema = mongoose.Schema({
   sessionTitle: String,
-  gameToBePlayed: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
+  gameTitle: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
   playersNeeded: Number,
   playersCommitted: Number,
   description: String,
