@@ -223,7 +223,7 @@ module.exports = (app, passport) => {
 
   // GET Dashboard
 
-  app.get("/:username", (req, res) => {
+  app.get("/dashboard", (req, res) => {
     res.json({ message: "It Works" });
   });
 };

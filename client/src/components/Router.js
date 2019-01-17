@@ -12,7 +12,7 @@ const Router = () => (
       <Route exact path="/" component={App} />
       <Route path="/signup" component={Signup} />
       <Route path="/login" component={Login} />
-      <Route path="/:username" component={Dashboard} />
+      <Route path="/dashboard" component={Dashboard} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
