@@ -13,6 +13,10 @@ const pastSessionsButton = () => {
   console.log("past game sessions button clicked");
 };
 
+const toggleAddGameForm = () => {
+  console.log("add game button clicked");
+};
+
 class Nav extends Component {
   render() {
     return (
@@ -22,6 +26,8 @@ class Nav extends Component {
         <button onClick={upcomingSessionsButton}>Upcoming Game Sessions</button>
 
         <button onClick={pastSessionsButton}>Past Game Sessions</button>
+
+        <button onClick={toggleAddGameForm}>Add Game</button>
       </div>
     );
   }

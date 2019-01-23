@@ -142,7 +142,7 @@ module.exports = (app, passport) => {
   //CREATE game session
   app.post("/sessions", (req, res) => {
     let newGameSession = req.body;
-    newGameSession.user = req.user; //"" + req.user._id + "";
+    newGameSession.user = req.user;
     Session.create(newGameSession, function(err, session) {
       console.log(`"New game session created: ${newGameSession.sessionTitle}"`);
       if (err) {

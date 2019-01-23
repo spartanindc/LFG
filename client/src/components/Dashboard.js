@@ -2,6 +2,7 @@ import React from "react";
 import { Component } from "react";
 import Nav from "./Nav";
 import LFG from "./LFG";
+import AddGameForm from "./AddGameForm";
 
 class Dashboard extends Component {
   render() {
@@ -11,6 +12,7 @@ class Dashboard extends Component {
         <p>This is the User Dashboard page</p>
         <Nav />
         <LFG />
+        <AddGameForm />
       </div>
     );
   }
