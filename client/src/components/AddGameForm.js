@@ -2,46 +2,104 @@ import React from "react";
 import { Component } from "react";
 
 class AddGameForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      gameTitle: "",
+      minPlayers: 1,
+      maxPlayers: 1,
+      description: "",
+      complexity: ""
+    };
+  }
+
+  onChange(e) {
+    console.log("here", e.target.getAttribute("name"), e.target.value);
+    let key = e.target.getAttribute("name");
+    this.setState({
+      [key]: e.target.value
+    });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(e.currentTarget.gameTitle.value);
+
+    fetch("/games", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    })
+      .then(res => res.json())
+      .then(res => {
+        // everything worked
+        // reset the form
+        // popup or message letting the user know that the form submitted correctly
+      })
+      .catch(err => console.error(err));
+  }
+
   render() {
     return (
       <div className="create-game-form">
-        <div class="create-game">
+        <div className="create-game">
           <h3>Add a game to your collection</h3>
           <fieldset>
             <legend>Add Game</legend>
-            <form action="/games" method="post">
-              <label for="title">Game Title</label>
+            <form action="#" method="post" onSubmit={e => this.onSubmit(e)}>
+              <label htmlFor="title">Game Title</label>
               <input
                 type="text"
                 aria-label="game title"
                 name="gameTitle"
-                autofocus
+                autoFocus
                 required
+                onChange={e => this.onChange(e)}
+                value={this.state.gameTitle}
               />
 
-              <label for="minimum players">Minimum Players</label>
+              <label htmlFor="minimum players">Minimum Players</label>
               <input
                 type="number"
                 aria-label="minimum players"
                 name="minPlayers"
                 required
+                onChange={e => this.onChange(e)}
+                value={this.state.minPlayers}
               />
 
-              <label for="maximum players">Maximum Players</label>
+              <label htmlFor="maximum players">Maximum Players</label>
               <input
                 type="number"
-                aria-label="Target Date"
-                name="targetDate"
+                aria-label="max players"
+                name="maxPlayers"
                 required
+                onChange={e => this.onChange(e)}
+                value={this.state.maxPlayers}
               />
 
-              <label for="description">Game Description</label>
-              <input type="text" aria-label="description" name="description" />
+              <label htmlFor="description">Game Description</label>
+              <textarea
+                type="text"
+                aria-label="description"
+                name="description"
+                onChange={e => this.onChange(e)}
+                value={this.state.description}
+              />
 
-              <label for="complexity">Complexity of Game</label>
-              <input type="text" aria-label="complexity" name="complexity" />
+              <label htmlFor="complexity">Complexity of Game</label>
+              <input
+                type="text"
+                aria-label="complexity"
+                name="complexity"
+                onChange={e => this.onChange(e)}
+                value={this.state.complexity}
+              />
 
-              <button type="submit" aria-label="create countdown">
+              <button type="submit" aria-label="create game">
                 Add Game!
               </button>
             </form>

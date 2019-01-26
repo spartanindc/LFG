@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import "../App.css";
 
 class App extends Component {
+  state = {
+    goingCrazy: true
+  };
   render() {
     return (
       <div className="App">

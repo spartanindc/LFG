@@ -53,6 +53,7 @@ module.exports = (app, passport) => {
   //CREATE game
   app.post("/games", (req, res) => {
     let newGame = req.body;
+    console.log(newGame);
     newGame.user = req.user; //"" + req.user._id + "";
     Game.create(newGame, function(err, game) {
       console.log(`"New game created: ${newGame.gameTitle}"`);
@@ -93,7 +94,7 @@ module.exports = (app, passport) => {
     //Then update that game record
     const updated = {};
     const updateableFields = [
-      "gametitle",
+      "gameTitle",
       "minPlayers",
       "maxPlayers",
       "description",
@@ -150,7 +151,7 @@ module.exports = (app, passport) => {
       }
       res.json({
         message: "Game Session Created!",
-        game: req.body.gameToBePlayed
+        game: req.body.gameTitle
       });
     });
   });
@@ -161,7 +162,7 @@ module.exports = (app, passport) => {
     //Ensure valid request to update
     const requiredFields = [
       "sessionTitle",
-      "gameToBePlayed",
+      "gameTitle",
       "playersNeeded",
       "playersCommitted",
       "description",
@@ -187,7 +188,7 @@ module.exports = (app, passport) => {
     const updated = {};
     const updateableFields = [
       "sessionTitle",
-      "gameToBePlayed",
+      "gameTitle",
       "playersNeeded",
       "playersCommitted",
       "description",
