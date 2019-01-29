@@ -224,7 +224,7 @@ module.exports = (app, passport) => {
 
   // GET Dashboard
 
-  app.get("/dashboard", (req, res) => {
+  app.get("/dashboard", isLoggedIn, (req, res) => {
     res.json({ message: "It Works" });
   });
 };
@@ -235,5 +235,5 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();
 
   // if they aren't redirect them to the login page
-  res.redirect("/login");
+  res.redirect("/");
 }
