@@ -13,9 +13,8 @@ class Dashboard extends Component {
           <h1>Dashboard</h1>
           <p>This is User Dashboard page</p>
         </div>
-        <BrowserRouter>
-          <DashNav />
-        </BrowserRouter>
+
+        <DashNav />
       </div>
     );
   }

@@ -1,10 +1,6 @@
 import React from "react";
 import { Component } from "react";
-import { Route, NavLink } from "react-router-dom";
-
-import AddGameForm from "./AddGameForm";
-import CreateSessionForm from "./CreateSessionForm";
-import LFG from "./LFG";
+import { Route, NavLink, Link } from "react-router-dom";
 
 class DashNav extends Component {
   render() {
@@ -14,17 +10,24 @@ class DashNav extends Component {
           <NavLink exact to="/lfg">
             Start
           </NavLink>
-          <NavLink exact to="/addgame">
-            Add a Game
-          </NavLink>
-          <NavLink exact to="/createsession">
-            Create a Game Session
-          </NavLink>
-        </div>
-        <div className="dash-content">
-          <Route exact path="/lfg" component={LFG} />
-          <Route exact path="/addgame" component={AddGameForm} />
-          <Route exact path="/createsession" component={CreateSessionForm} />
+          <div>
+            <p>Games</p>
+            <NavLink exact to="/games">
+              Game List
+            </NavLink>
+            <NavLink exact to="/addgame">
+              Add a Game
+            </NavLink>
+          </div>
+          <div>
+            <p>Game Sessions</p>
+            <p>
+              <Link to="/edit-session/107381739817">Edit Session</Link>
+            </p>
+            <NavLink exact to="/createsession">
+              Create Game Session
+            </NavLink>
+          </div>
         </div>
       </div>
     );

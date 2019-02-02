@@ -26,12 +26,6 @@ class TopNav extends Component {
             Dashboard
           </NavLink>
         </div>
-        <div className="content">
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/dashboard" component={Dashboard} />
-        </div>
       </div>
     );
   }

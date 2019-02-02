@@ -4,11 +4,12 @@ import { Component } from "react";
 class CreateSessionForm extends Component {
   state = {
     sessionTitle: "",
-    gameTitle: "",
+    gameTitle: "5c322f01e35aca379c2db48d",
     playersNeeded: 0,
     playersCommitted: 0,
     description: "",
-    startTimeAndDate: ""
+    startTimeAndDate: "",
+    editing: false
   };
 
   onChange(e) {
@@ -18,17 +19,34 @@ class CreateSessionForm extends Component {
     });
   }
 
+  componentDidMount() {
+    if (
+      this.props.hasOwnProperty("match") &&
+      this.props.match.params.hasOwnProperty("id")
+    ) {
+      // fetch request to get the details of that session
+      this.setState({
+        editing: true,
+        sessionTitle: "Just testing editing"
+      });
+    }
+  }
+
   onSubmit(e) {
     e.preventDefault();
     console.log(`${e.currentTarget.sessionTitle.value} + "Created"`);
-
+    let method = this.state.editing ? "PUT" : "POST";
+    let postBody = this.state;
+    if (this.state.editing) {
+      postBody["_id"] = this.props.match.params.id;
+    }
     fetch("/sessions", {
-      method: "POST",
+      method: method,
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(postBody)
     })
       .then(res => res.json())
       .then(res => {
@@ -45,7 +63,9 @@ class CreateSessionForm extends Component {
         <div className="create-session">
           <h3>Organize a boardgame session</h3>
           <fieldset>
-            <legend>Create Game Session</legend>
+            <legend>
+              {this.state.editing ? "Edit" : "Create"} Game Session
+            </legend>
             <form action="#" method="post" onSubmit={e => this.onSubmit(e)}>
               <label htmlFor="session title">Session Title</label>
               <input
@@ -59,14 +79,24 @@ class CreateSessionForm extends Component {
               />
 
               <label htmlFor="game title">Game Title</label>
-              <input
+              <select
+                aria-label="game title"
+                name="gameTitle"
+                required
+                onChange={e => this.onChange(e)}
+                value={this.state.gameTitle}
+              >
+                <option value="5c322f01e35aca379c2db48d">Patchwork</option>
+                <option value="5c3d52351a7c7d5a04c6fed9">Diplomacy</option>
+              </select>
+              {/*<input
                 type="text"
                 aria-label="game title"
                 name="gameTitle"
                 required
                 onChange={e => this.onChange(e)}
                 value={this.state.gameTitle}
-              />
+              />*/}
 
               <label htmlFor="players needed">Players Needed</label>
               <input
@@ -106,8 +136,15 @@ class CreateSessionForm extends Component {
                 value={this.state.startTimeAndDate}
               />
 
-              <button type="submit" aria-label="create game session">
-                Create Game Session!
+              <button
+                type="submit"
+                aria-label={
+                  this.state.editing
+                    ? "edit game session"
+                    : "create game session"
+                }
+              >
+                {this.state.editing ? "Edit" : "Create"} Game Session!
               </button>
             </form>
           </fieldset>
