@@ -2,16 +2,13 @@ import React from "react";
 import { Component } from "react";
 
 class AddGameForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      gameTitle: "",
-      minPlayers: 1,
-      maxPlayers: 1,
-      description: "",
-      complexity: ""
-    };
-  }
+  state = {
+    gameTitle: "",
+    minPlayers: 1,
+    maxPlayers: 1,
+    description: "",
+    complexity: ""
+  };
 
   onChange(e) {
     console.log("here", e.target.getAttribute("name"), e.target.value);
@@ -37,7 +34,15 @@ class AddGameForm extends Component {
       .then(res => {
         // everything worked
         // reset the form
+        this.setState({
+          gameTitle: "",
+          minPlayers: 1,
+          maxPlayers: 1,
+          description: "",
+          complexity: ""
+        });
         // popup or message letting the user know that the form submitted correctly
+        alert("Game Created!");
       })
       .catch(err => console.error(err));
   }

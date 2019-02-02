@@ -5,15 +5,16 @@ const mongoose = require("mongoose");
 
 const sessionSchema = mongoose.Schema({
   sessionTitle: String,
-  gameTitle: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
+  game: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
   playersNeeded: Number,
   playersCommitted: Number,
   description: String,
-  startTimeAndDate: String
+  startTimeAndDate: String,
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 });
 
 sessionSchema.methods.serialize = function() {
-  return {};
+  return this;
 };
 
 sessionSchema.pre("find", function() {

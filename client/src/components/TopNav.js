@@ -16,15 +16,24 @@ class TopNav extends Component {
           <NavLink exact to="/">
             Home
           </NavLink>
-          <NavLink exact to="/login">
-            Login
-          </NavLink>
-          <NavLink exact to="/signup">
-            Sign Up
-          </NavLink>
-          <NavLink exact to="/dashboard">
-            Dashboard
-          </NavLink>
+          {this.props.isLoggedIn ? (
+            <NavLink exact to="/logout">
+              Logout
+            </NavLink>
+          ) : (
+            <NavLink exact to="/login">
+              Login
+            </NavLink>
+          )}
+          {this.props.isLoggedIn ? (
+            <NavLink exact to="/dashboard">
+              Dashboard
+            </NavLink>
+          ) : (
+            <NavLink exact to="/signup">
+              Signup
+            </NavLink>
+          )}
         </div>
       </div>
     );

@@ -11,13 +11,17 @@ module.exports = (app, passport) => {
   });
 
   // process the login form
-  app.post(
-    "/login",
-    passport.authenticate("local-login", {
-      successRedirect: "/:username", // redirect to the secure profile section
-      failureRedirect: "/signup" // redirect back to the signup page if there is an error
-    })
-  );
+  app.post("/login", function(req, res) {
+    passport.authenticate("local-login", function(err, user, info) {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      if (!user) {
+        return res.status(500).json(info);
+      }
+      return res.json(user);
+    })(req, res);
+  });
 
   // SIGNUP
   // show the signup form
@@ -26,13 +30,17 @@ module.exports = (app, passport) => {
   });
 
   // process the signup form
-  app.post(
-    "/signup",
-    passport.authenticate("local-signup", {
-      successRedirect: "/login", // redirect to the secure profile section
-      failureRedirect: "/signup" // redirect back to the signup page if there is an error
-    })
-  );
+  app.post("/signup", function(req, res) {
+    passport.authenticate("local-signup", function(err, user, info) {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      if (!user) {
+        return res.status(500).json(info);
+      }
+      return res.json(user);
+    })(req, res);
+  });
 
   //Game CRUD
 

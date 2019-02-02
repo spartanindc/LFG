@@ -1,20 +1,37 @@
 import React from "react";
 import { Component } from "react";
-import { BrowserRouter } from "react-router-dom";
 
 import DashNav from "./DashNav";
+import GameList from "./GameList";
 
 class Dashboard extends Component {
-  componentDidMount() {}
+  state = {
+    games: {},
+    sessions: {},
+    userGames: {},
+    userSessions: {}
+  };
+
+  componentDidMount() {
+    //get games
+    /*fetch("/games").then(res => {
+      res.json().then(data => {});
+    });
+
+    //get sessions
+    fetch("/sessions").then(res => {
+      res.json().then(data => {});
+    });*/
+  }
   render() {
     return (
       <div className="dashboard">
-        <div classname="top-content">
+        <div className="top-content">
           <h1>Dashboard</h1>
           <p>This is User Dashboard page</p>
         </div>
-
         <DashNav />
+        <GameList />
       </div>
     );
   }

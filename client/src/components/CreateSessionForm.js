@@ -4,20 +4,15 @@ import { Component } from "react";
 class CreateSessionForm extends Component {
   state = {
     sessionTitle: "",
-    gameTitle: "5c322f01e35aca379c2db48d",
+    gameTitle: "",
     playersNeeded: 0,
     playersCommitted: 0,
     description: "",
     startTimeAndDate: "",
-    editing: false
+    editing: false,
+    sessionId: "",
+    creator: localStorage.getItem("userID")
   };
-
-  onChange(e) {
-    let key = e.target.getAttribute("name");
-    this.setState({
-      [key]: e.target.value
-    });
-  }
 
   componentDidMount() {
     if (
@@ -27,9 +22,38 @@ class CreateSessionForm extends Component {
       // fetch request to get the details of that session
       this.setState({
         editing: true,
-        sessionTitle: "Just testing editing"
+        sessionTitle: "Just testing editing",
+        sessionId: ""
       });
     }
+    //Populate the game title select with games from the db
+    let gameSelect = document.getElementById("game-title");
+    gameSelect.length = 0;
+
+    let defaultOption = document.createElement("option");
+    defaultOption.text = "Choose a game";
+
+    gameSelect.add(defaultOption);
+    gameSelect.selectedIndex = 0;
+
+    fetch("/games").then(res => {
+      res.json().then(data => {
+        let option = "";
+        for (let i = 0; i < data.length; i++) {
+          option = document.createElement("option");
+          option.text = data[i].gameTitle;
+          option.setAttribute("value", data[i].id);
+          gameSelect.add(option);
+        }
+      });
+    });
+  }
+
+  onChange(e) {
+    let key = e.target.getAttribute("name");
+    this.setState({
+      [key]: e.target.value
+    });
   }
 
   onSubmit(e) {
@@ -52,6 +76,16 @@ class CreateSessionForm extends Component {
       .then(res => {
         // everything worked
         // reset the form
+        this.setState({
+          sessionTitle: "",
+          gameTitle: "",
+          playersNeeded: 0,
+          playersCommitted: 0,
+          description: "",
+          startTimeAndDate: "",
+          editing: true,
+          sessionId: ""
+        });
         // popup or message letting the user know that the form submitted correctly
       })
       .catch(err => console.error(err));
@@ -85,10 +119,8 @@ class CreateSessionForm extends Component {
                 required
                 onChange={e => this.onChange(e)}
                 value={this.state.gameTitle}
-              >
-                <option value="5c322f01e35aca379c2db48d">Patchwork</option>
-                <option value="5c3d52351a7c7d5a04c6fed9">Diplomacy</option>
-              </select>
+                id="game-title"
+              />
               {/*<input
                 type="text"
                 aria-label="game title"
