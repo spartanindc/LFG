@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 
-class CreateSessionForm extends Component {
+class SessionForm extends Component {
   state = {
     sessionTitle: "",
     gameTitle: "",
@@ -59,13 +59,13 @@ class CreateSessionForm extends Component {
   onSubmit(e) {
     e.preventDefault();
     console.log(`${e.currentTarget.sessionTitle.value} + "Created"`);
-    let method = this.state.editing ? "PUT" : "POST";
+
     let postBody = this.state;
     if (this.state.editing) {
       postBody["_id"] = this.props.match.params.id;
     }
     fetch("/sessions", {
-      method: method,
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -186,4 +186,4 @@ class CreateSessionForm extends Component {
   }
 }
 
-export default CreateSessionForm;
+export default SessionForm;

@@ -1,19 +1,17 @@
 import React from "react";
 import { Component } from "react";
 
-const fetchGames = () => {};
-
 class GameList extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.props.user);
+    console.log(this.props.games);
+  }
+
   render() {
     return (
       <div className="gameListContainer">
         <h2>List of games</h2>
-        <ul className="gameList">
-          <li> Game 1 </li>
-          <li> Game 2 </li>
-          <li> Game 3 </li>
-        </ul>
+        <p>{this.props.games.gameTitle}</p>
       </div>
     );
   }

@@ -7,7 +7,7 @@ import Logout from "./Logout";
 import Dashboard from "./Dashboard";
 import Home from "./Home";
 import AddGameForm from "./AddGameForm";
-import CreateSessionForm from "./CreateSessionForm";
+import SessionForm from "./SessionForm";
 import LFG from "./LFG";
 import GameList from "./GameList";
 import DashNav from "./DashNav";
@@ -75,8 +75,8 @@ class App extends Component {
             <Route exact path="/lfg" component={LFG} />
             <Route exact path="/dashboard/games" component={GameList} />
             <Route exact path="/addgame" component={AddGameForm} />
-            <Route exact path="/createsession" component={CreateSessionForm} />
-            <Route path="/edit-session/:id" component={CreateSessionForm} />
+            <Route exact path="/createsession" component={SessionForm} />
+            <Route path="/edit-session/:id" component={SessionForm} />
           </div>
         ) : (
           ""

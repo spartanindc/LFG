@@ -9,19 +9,24 @@ class Dashboard extends Component {
     games: {},
     sessions: {},
     userGames: {},
-    userSessions: {}
+    userSessions: {},
+    localUser: [{ Homer: "Simpson" }, "Marge", "Bart", "Lisa"]
   };
 
   componentDidMount() {
     //get games
-    /*fetch("/games").then(res => {
-      res.json().then(data => {});
+    fetch("/games").then(res => {
+      res.json().then(gameData => {
+        this.setState({ games: gameData });
+      });
     });
 
     //get sessions
     fetch("/sessions").then(res => {
-      res.json().then(data => {});
-    });*/
+      res.json().then(sessionData => {
+        this.setState({ sessions: sessionData });
+      });
+    });
   }
   render() {
     return (
@@ -31,7 +36,7 @@ class Dashboard extends Component {
           <p>This is User Dashboard page</p>
         </div>
         <DashNav />
-        <GameList />
+        <GameList games={this.state.games} user={this.state.localUser} />
       </div>
     );
   }
