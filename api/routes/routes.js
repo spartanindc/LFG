@@ -51,6 +51,13 @@ module.exports = (app, passport) => {
     });
   });
 
+  //GET a list of games for a specific user
+  app.get("/games/user", (req, res) => {
+    Game.find({ user: req.user._id }).then(games => {
+      res.json(games.map(game => game.serialize()));
+    }); // Game.find({user:req.body.userID})
+  });
+
   //GET a specific game
   app.get("/games/:id", (req, res) => {
     Game.findById(req.params.id, function(err, game) {

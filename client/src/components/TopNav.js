@@ -1,11 +1,6 @@
 import React from "react";
 import { Component } from "react";
-import { Route, NavLink } from "react-router-dom";
-
-import Signup from "./Signup";
-import Login from "./Login";
-import Dashboard from "./Dashboard";
-import Home from "./Home";
+import { NavLink } from "react-router-dom";
 
 class TopNav extends Component {
   render() {

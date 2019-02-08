@@ -18,13 +18,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: localStorage.getItem("userID") !== null
+      isLoggedIn: localStorage.getItem("userID") !== null,
+      localUser: ""
     };
   }
 
   hydrateState() {
     this.setState({
-      isLoggedIn: localStorage.getItem("userID") !== null
+      isLoggedIn: localStorage.getItem("userID") !== null,
+      localUser: localStorage.getItem("userID")
     });
   }
 
@@ -67,7 +69,17 @@ class App extends Component {
               />
             )}
           />
-          <Route exact path="/dashboard" component={Dashboard} />
+          <Route
+            exact
+            path="/dashboard"
+            render={props => (
+              <Dashboard
+                {...props}
+                hydrateState={() => this.hydrateState()}
+                isLoggedIn={this.state.isLoggedIn}
+              />
+            )}
+          />
         </div>
         {this.state.isLoggedIn ? <DashNav /> : ""}
         {this.state.isLoggedIn ? (

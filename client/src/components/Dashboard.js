@@ -10,7 +10,7 @@ class Dashboard extends Component {
     sessions: {},
     userGames: {},
     userSessions: {},
-    localUser: [{ Homer: "Simpson" }, "Marge", "Bart", "Lisa"]
+    localUser: localStorage.getItem("userID")
   };
 
   componentDidMount() {
@@ -36,7 +36,7 @@ class Dashboard extends Component {
           <p>This is User Dashboard page</p>
         </div>
         <DashNav />
-        <GameList games={this.state.games} user={this.state.localUser} />
+        <GameList games={this.state.games} />
       </div>
     );
   }
