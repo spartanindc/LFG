@@ -22,8 +22,8 @@ class SessionForm extends Component {
       // fetch request to get the details of that session
       this.setState({
         editing: true,
-        sessionTitle: "Just testing editing",
-        sessionId: ""
+        sessionTitle: "", //{this.state.session.sessionTitle},
+        sessionId: "" //{this.state.sesssion._id}
       });
     }
     //Populate the game title select with games from the db

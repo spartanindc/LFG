@@ -1,42 +1,25 @@
 import React from "react";
 import { Component } from "react";
 
-import DashNav from "./DashNav";
 import GameList from "./GameList";
+import SessionsList from "./SessionsList";
+import LFG from "./LFG";
 
 class Dashboard extends Component {
-  state = {
-    games: {},
-    sessions: {},
-    userGames: {},
-    userSessions: {},
-    localUser: localStorage.getItem("userID")
-  };
-
-  componentDidMount() {
-    //get games
-    fetch("/games").then(res => {
-      res.json().then(gameData => {
-        this.setState({ games: gameData });
-      });
-    });
-
-    //get sessions
-    fetch("/sessions").then(res => {
-      res.json().then(sessionData => {
-        this.setState({ sessions: sessionData });
-      });
-    });
-  }
   render() {
     return (
       <div className="dashboard">
         <div className="top-content">
           <h1>Dashboard</h1>
-          <p>This is User Dashboard page</p>
+          <p>This is {this.props.localUserName}'s Dashboard page</p>
+          <LFG {...this.props} />
         </div>
-        <DashNav />
-        <GameList games={this.state.games} />
+        <GameList
+          user={this.props.localUser}
+          games={this.props.games}
+          parent="dashboard"
+        />
+        <SessionsList sessions={this.props.sessions} />
       </div>
     );
   }

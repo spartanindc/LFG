@@ -7,7 +7,8 @@ class AddGameForm extends Component {
     minPlayers: 1,
     maxPlayers: 1,
     description: "",
-    complexity: ""
+    complexity: "",
+    user: this.props.user
   };
 
   onChange(e) {

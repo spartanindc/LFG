@@ -33,6 +33,7 @@ class Login extends Component {
       .then(res => {
         console.log(res);
         localStorage.setItem("userID", res._id);
+        localStorage.setItem("username", res.local.username);
         this.props.hydrateState();
         this.props.history.push("/dashboard");
       })

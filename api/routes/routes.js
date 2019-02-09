@@ -52,10 +52,10 @@ module.exports = (app, passport) => {
   });
 
   //GET a list of games for a specific user
-  app.get("/games/user", (req, res) => {
-    Game.find({ user: req.user._id }).then(games => {
+  app.get("/games/:userID", (req, res) => {
+    Game.find({ user: req.params.userID }).then(games => {
       res.json(games.map(game => game.serialize()));
-    }); // Game.find({user:req.body.userID})
+    }); // Game.find(){ user: req.user._id }
   });
 
   //GET a specific game
@@ -69,7 +69,7 @@ module.exports = (app, passport) => {
   app.post("/games", (req, res) => {
     let newGame = req.body;
     console.log(newGame);
-    newGame.user = req.user; //"" + req.user._id + "";
+    newGame.user = req.body.user; //"" + req.user._id + "";
     Game.create(newGame, function(err, game) {
       console.log(`"New game created: ${newGame.gameTitle}"`);
       if (err) {
@@ -147,6 +147,12 @@ module.exports = (app, passport) => {
       res.json(sessions.map(session => session.serialize()));
     });
   });
+  //GET specific User's games
+  app.get("/sessions/:userID", (req, res) => {
+    Session.find({ user: req.params.userID }).then(sessions => {
+      res.json(sessions.map(session => session.serialize()));
+    });
+  });
 
   //GET a specific game session
   app.get("/sessions/:id", (req, res) => {
@@ -158,7 +164,8 @@ module.exports = (app, passport) => {
   //CREATE game session
   app.post("/sessions", (req, res) => {
     let newGameSession = req.body;
-    newGameSession.user = req.user;
+    console.log(newGameSession);
+    newGameSession.user = req.body.user;
     Session.create(newGameSession, function(err, session) {
       console.log(`"New game session created: ${newGameSession.sessionTitle}"`);
       if (err) {

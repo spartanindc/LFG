@@ -22,7 +22,7 @@ class DashNav extends Component {
           <div>
             <p>Game Sessions</p>
             <p>
-              <Link to="/edit-session/107381739817">Edit Session</Link>
+              <Link to="/sessions">Session List</Link>
             </p>
             <NavLink exact to="/createsession">
               Create Game Session

@@ -5,32 +5,44 @@ import { NavLink } from "react-router-dom";
 class TopNav extends Component {
   render() {
     return (
-      <div className="navbar">
-        <h2>LFG</h2>
-        <div className="links">
-          <NavLink exact to="/">
-            Home
-          </NavLink>
+      <nav className="navbar">
+        <a href="#" className="brand-link left">
+          LFG
+        </a>
+        <ul className="links right">
+          <li>
+            <NavLink exact to="/">
+              Home
+            </NavLink>
+          </li>
           {this.props.isLoggedIn ? (
-            <NavLink exact to="/logout">
-              Logout
-            </NavLink>
+            <li>
+              <NavLink exact to="/dashboard">
+                Dashboard
+              </NavLink>
+            </li>
           ) : (
-            <NavLink exact to="/login">
-              Login
-            </NavLink>
+            <li>
+              <NavLink exact to="/signup">
+                Signup
+              </NavLink>
+            </li>
           )}
           {this.props.isLoggedIn ? (
-            <NavLink exact to="/dashboard">
-              Dashboard
-            </NavLink>
+            <li>
+              <NavLink exact to="/logout">
+                Logout
+              </NavLink>
+            </li>
           ) : (
-            <NavLink exact to="/signup">
-              Signup
-            </NavLink>
+            <li>
+              <NavLink exact to="/login">
+                Login
+              </NavLink>
+            </li>
           )}
-        </div>
-      </div>
+        </ul>
+      </nav>
     );
   }
 }

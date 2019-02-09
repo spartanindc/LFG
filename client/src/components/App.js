@@ -6,11 +6,8 @@ import Login from "./Login";
 import Logout from "./Logout";
 import Dashboard from "./Dashboard";
 import Home from "./Home";
-import AddGameForm from "./AddGameForm";
-import SessionForm from "./SessionForm";
-import LFG from "./LFG";
+import SessionsList from "./SessionsList";
 import GameList from "./GameList";
-import DashNav from "./DashNav";
 
 import TopNav from "./TopNav";
 
@@ -19,7 +16,12 @@ class App extends Component {
     super(props);
     this.state = {
       isLoggedIn: localStorage.getItem("userID") !== null,
-      localUser: ""
+      games: [],
+      sessions: [],
+      userGames: [],
+      userSessions: [],
+      localUser: localStorage.getItem("userID"),
+      localUserName: localStorage.getItem("username")
     };
   }
 
@@ -30,11 +32,39 @@ class App extends Component {
     });
   }
 
+  componentDidMount() {
+    //get games
+    fetch("/games").then(res => {
+      res.json().then(gameData => {
+        this.setState({ games: gameData });
+      });
+    });
+    fetch(`/games/${this.state.localUser}`).then(res => {
+      res.json().then(gameData => {
+        this.setState({ userGames: gameData });
+      });
+    });
+
+    //get sessions
+    fetch("/sessions").then(res => {
+      res.json().then(sessionData => {
+        this.setState({ sessions: sessionData });
+      });
+    });
+
+    fetch(`/sessions/${this.state.localUser}`).then(res => {
+      res.json().then(sessionData => {
+        this.setState({ userSessions: sessionData });
+      });
+    });
+  }
+
   render() {
     return (
       <div className="app">
         <TopNav isLoggedIn={this.state.isLoggedIn} />
-        <div className="content">
+
+        <div className="content container">
           <Route exact path="/" component={Home} />
           <Route
             exact
@@ -75,20 +105,37 @@ class App extends Component {
             render={props => (
               <Dashboard
                 {...props}
+                {...this.state}
                 hydrateState={() => this.hydrateState()}
-                isLoggedIn={this.state.isLoggedIn}
               />
             )}
           />
         </div>
-        {this.state.isLoggedIn ? <DashNav /> : ""}
         {this.state.isLoggedIn ? (
           <div className="dash-content">
-            <Route exact path="/lfg" component={LFG} />
-            <Route exact path="/dashboard/games" component={GameList} />
-            <Route exact path="/addgame" component={AddGameForm} />
-            <Route exact path="/createsession" component={SessionForm} />
-            <Route path="/edit-session/:id" component={SessionForm} />
+            <Route
+              exact
+              path="/games"
+              render={props => (
+                <GameList
+                  {...props}
+                  {...this.state}
+                  hydrateState={() => this.hydrateState()}
+                  parent="app"
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/sessions"
+              render={props => (
+                <SessionsList
+                  {...props}
+                  {...this.state}
+                  hydrateState={() => this.hydrateState()}
+                />
+              )}
+            />
           </div>
         ) : (
           ""
