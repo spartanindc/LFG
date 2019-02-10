@@ -24,23 +24,18 @@ class GameList extends Component {
   }
 
   render() {
-    let form =
-      this.state.displayCreateGameForm === true ? (
-        <AddGameForm user={this.props.user} />
-      ) : (
-        ""
-      );
+    let form = this.state.displayCreateGameForm === true ? <AddGameForm /> : "";
 
     this.props.games.sort(this.alphaSort);
     let max = this.props.parent === "dashboard" ? 5 : this.props.games.length;
     let games = this.props.games.map((game, index) => {
       if (index < max) {
         return (
-          <div className="game" key={`game-${index}`}>
+          <div className="game collection-item" key={`game-${index}`}>
             <p>{game.gameTitle}</p>
-            <button className="desc-button">Details</button>
-            <button className="edit-button">Edit</button>
-            <button className="delete-button">Delete</button>
+            <button className="desc btn-floating btn-small green">+</button>
+            <button className="edit btn-small blue">Edit</button>
+            <button className="delete btn-small red">Delete</button>
           </div>
         );
       }
@@ -48,12 +43,12 @@ class GameList extends Component {
 
     return (
       <div className="gameListContainer">
-        <h2>List of games</h2>
+        <h4>List of games</h4>
         <button className="btn" onClick={this.toggleForm}>
           Add Game
         </button>
         {form}
-        {games}
+        <ul className="collection">{games}</ul>
         {this.props.parent === "dashboard" ? (
           <Link to="/games">View All</Link>
         ) : (

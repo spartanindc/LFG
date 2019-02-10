@@ -16,9 +16,13 @@ class Home extends Component {
               boardgaming friends with LFG!
             </p>
           </div>
-          <Link to={"/login"}>Login</Link>
+          <Link className="btn" to={"/login"}>
+            Login
+          </Link>
           <br />
-          <Link to={"/signup"}>Signup</Link>
+          <Link className="btn" to={"/signup"}>
+            Signup
+          </Link>
         </div>
         <footer role="contentinfo">
           <p>Created by David Alim</p>

@@ -10,16 +10,12 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <div className="top-content">
-          <h1>Dashboard</h1>
+          <h2>Dashboard</h2>
           <p>This is {this.props.localUserName}'s Dashboard page</p>
-          <LFG {...this.props} />
+          <LFG />
         </div>
-        <GameList
-          user={this.props.localUser}
-          games={this.props.games}
-          parent="dashboard"
-        />
-        <SessionsList sessions={this.props.sessions} />
+        <GameList games={this.props.games} parent="dashboard" />
+        <SessionsList sessions={this.props.sessions} parent="dashboard" />
       </div>
     );
   }

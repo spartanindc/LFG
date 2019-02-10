@@ -173,7 +173,8 @@ module.exports = (app, passport) => {
       }
       res.json({
         message: "Game Session Created!",
-        game: req.body.gameTitle
+        game: req.body.gameTitle,
+        user: req.body.user
       });
     });
   });

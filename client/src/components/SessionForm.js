@@ -11,7 +11,7 @@ class SessionForm extends Component {
     startTimeAndDate: "",
     editing: false,
     sessionId: "",
-    creator: localStorage.getItem("userID")
+    user: localStorage.getItem("userID")
   };
 
   componentDidMount() {
@@ -30,7 +30,7 @@ class SessionForm extends Component {
     let gameSelect = document.getElementById("game-title");
     gameSelect.length = 0;
 
-    let defaultOption = document.createElement("option");
+    const defaultOption = document.createElement("option");
     defaultOption.text = "Choose a game";
 
     gameSelect.add(defaultOption);
@@ -60,10 +60,19 @@ class SessionForm extends Component {
     e.preventDefault();
     console.log(`${e.currentTarget.sessionTitle.value} + "Created"`);
 
-    let postBody = this.state;
+    let postBody = {
+      sessionTitle: this.state.sessionTitle,
+      game: this.state.gameTitle,
+      playersNeeded: this.state.playersNeeded,
+      playersCommitted: this.state.playersCommitted,
+      description: this.state.description,
+      startTimeAndDate: this.state.startTimeAndDate,
+      creator: this.state.user
+    };
     if (this.state.editing) {
       postBody["_id"] = this.props.match.params.id;
     }
+
     fetch("/sessions", {
       method: "POST",
       headers: {
@@ -75,6 +84,7 @@ class SessionForm extends Component {
       .then(res => res.json())
       .then(res => {
         // everything worked
+
         // reset the form
         this.setState({
           sessionTitle: "",
@@ -83,10 +93,11 @@ class SessionForm extends Component {
           playersCommitted: 0,
           description: "",
           startTimeAndDate: "",
-          editing: true,
+          editing: false,
           sessionId: ""
         });
         // popup or message letting the user know that the form submitted correctly
+        alert("Game Session Created!");
       })
       .catch(err => console.error(err));
   }
@@ -95,7 +106,6 @@ class SessionForm extends Component {
     return (
       <div className="create-session-form">
         <div className="create-session">
-          <h3>Organize a boardgame session</h3>
           <fieldset>
             <legend>
               {this.state.editing ? "Edit" : "Create"} Game Session
@@ -121,14 +131,6 @@ class SessionForm extends Component {
                 value={this.state.gameTitle}
                 id="game-title"
               />
-              {/*<input
-                type="text"
-                aria-label="game title"
-                name="gameTitle"
-                required
-                onChange={e => this.onChange(e)}
-                value={this.state.gameTitle}
-              />*/}
 
               <label htmlFor="players needed">Players Needed</label>
               <input
@@ -169,6 +171,7 @@ class SessionForm extends Component {
               />
 
               <button
+                className="btn-small"
                 type="submit"
                 aria-label={
                   this.state.editing

@@ -32,6 +32,13 @@ class App extends Component {
     });
   }
 
+  //Button functionality
+  detailsBtn = () => {};
+
+  editBtn = () => {};
+
+  deleteBtn = () => {};
+
   componentDidMount() {
     //get games
     fetch("/games").then(res => {
@@ -39,6 +46,7 @@ class App extends Component {
         this.setState({ games: gameData });
       });
     });
+
     fetch(`/games/${this.state.localUser}`).then(res => {
       res.json().then(gameData => {
         this.setState({ userGames: gameData });

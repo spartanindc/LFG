@@ -8,8 +8,23 @@ class AddGameForm extends Component {
     maxPlayers: 1,
     description: "",
     complexity: "",
-    user: this.props.user
+    user: localStorage.getItem("userID"),
+    editing: false
   };
+
+  componentDidMount() {
+    if (
+      this.props.hasOwnProperty("match") &&
+      this.props.match.params.hasOwnProperty("id")
+    ) {
+      // fetch request to get the details of that session
+      this.setState({
+        editing: true,
+        gameTitle: "", //{this.state.session.sessionTitle},
+        gameId: "" //{this.state.sesssion._id}
+      });
+    }
+  }
 
   onChange(e) {
     console.log("here", e.target.getAttribute("name"), e.target.value);
@@ -23,13 +38,25 @@ class AddGameForm extends Component {
     e.preventDefault();
     console.log(e.currentTarget.gameTitle.value);
 
+    let postBody = {
+      gameTitle: this.state.gameTitle,
+      minPlayers: this.state.minPlayers,
+      maxPlayers: this.state.maxPlayers,
+      description: this.state.description,
+      complexity: this.state.complexity,
+      user: this.state.user
+    };
+    if (this.state.editing) {
+      postBody["_id"] = this.props.match.params.id;
+    }
+
     fetch("/games", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(postBody)
     })
       .then(res => res.json())
       .then(res => {
@@ -52,7 +79,6 @@ class AddGameForm extends Component {
     return (
       <div className="create-game-form">
         <div className="create-game">
-          <h3>Add a game to your collection</h3>
           <fieldset>
             <legend>Add Game</legend>
             <form action="#" method="post" onSubmit={e => this.onSubmit(e)}>
