@@ -28,7 +28,12 @@ class SessionsList extends Component {
         <p>
           {session.sessionTitle}, playing {session.game.gameTitle}
         </p>
-        <button className="desc btn-floating btn-small green">+</button>
+        <div className="details">
+          <p>{session.description}</p>
+          <p>{session.playersCommitted} players have signed up</p>
+          <p>Looking for {session.playersNeeded} more players</p>
+        </div>
+
         <button className="edit btn-small blue">Edit</button>
         <button className="delete btn-small red">Delete</button>
       </div>

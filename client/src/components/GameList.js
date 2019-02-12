@@ -33,7 +33,13 @@ class GameList extends Component {
         return (
           <div className="game collection-item" key={`game-${index}`}>
             <p>{game.gameTitle}</p>
-            <button className="desc btn-floating btn-small green">+</button>
+
+            <div className="details">
+              <p>{game.players} players.</p>
+              <p>Complexity: {game.complexity}</p>
+              <p>{game.description}</p>
+            </div>
+
             <button className="edit btn-small blue">Edit</button>
             <button className="delete btn-small red">Delete</button>
           </div>
@@ -50,7 +56,7 @@ class GameList extends Component {
         {form}
         <ul className="collection">{games}</ul>
         {this.props.parent === "dashboard" ? (
-          <Link to="/games">View All</Link>
+          <Link to="/games">View all games</Link>
         ) : (
           ""
         )}

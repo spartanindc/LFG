@@ -126,6 +126,7 @@ class SessionForm extends Component {
               <select
                 aria-label="game title"
                 name="gameTitle"
+                className="browser-default"
                 required
                 onChange={e => this.onChange(e)}
                 value={this.state.gameTitle}
