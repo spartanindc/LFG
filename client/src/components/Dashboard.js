@@ -15,7 +15,11 @@ class Dashboard extends Component {
           <LFG />
         </div>
         <GameList games={this.props.games} parent="dashboard" />
-        <SessionsList sessions={this.props.sessions} parent="dashboard" />
+        <SessionsList
+          rsvpToSession={this.props.rsvpToSession}
+          sessions={this.props.sessions}
+          parent="dashboard"
+        />
       </div>
     );
   }

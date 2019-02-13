@@ -10,6 +10,7 @@ const sessionSchema = mongoose.Schema({
   playersCommitted: Number,
   description: String,
   startTimeAndDate: String,
+  players: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 });
 

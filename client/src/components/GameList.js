@@ -26,6 +26,8 @@ class GameList extends Component {
   render() {
     let form = this.state.displayCreateGameForm === true ? <AddGameForm /> : "";
 
+    let numberOfGames = this.props.games.length;
+
     this.props.games.sort(this.alphaSort);
     let max = this.props.parent === "dashboard" ? 5 : this.props.games.length;
     let games = this.props.games.map((game, index) => {
@@ -56,7 +58,7 @@ class GameList extends Component {
         {form}
         <ul className="collection">{games}</ul>
         {this.props.parent === "dashboard" ? (
-          <Link to="/games">View all games</Link>
+          <Link to="/games">View all {numberOfGames} games</Link>
         ) : (
           ""
         )}

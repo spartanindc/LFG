@@ -39,6 +39,37 @@ class App extends Component {
 
   deleteBtn = () => {};
 
+  rsvpToSession(sessionId) {
+    // fetch call using sessionId & this.state.localUser
+    console.log(`${this.state.localUser} RSVPd to ${sessionId}`);
+    fetch("/rsvp", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userID: this.state.localUser,
+        sessionID: sessionId
+      })
+    })
+      .then(res => res.json())
+      .then(res => {
+        fetch("/sessions").then(res => {
+          res.json().then(sessionData => {
+            this.setState({ sessions: sessionData });
+          });
+        });
+
+        fetch(`/sessions/${this.state.localUser}`).then(res => {
+          res.json().then(sessionData => {
+            this.setState({ userSessions: sessionData });
+          });
+        });
+      });
+    // in call back, fetch sessions and setState again
+  }
+
   componentDidMount() {
     //get games
     fetch("/games").then(res => {
@@ -114,6 +145,7 @@ class App extends Component {
               <Dashboard
                 {...props}
                 {...this.state}
+                rsvpToSession={sessionid => this.rsvpToSession(sessionid)}
                 hydrateState={() => this.hydrateState()}
               />
             )}

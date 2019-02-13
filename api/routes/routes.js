@@ -179,6 +179,19 @@ module.exports = (app, passport) => {
     });
   });
 
+  app.post("/rsvp", (req, res) => {
+    Session.findOne({ _id: req.body.sessionID })
+      .then(session => {
+        session.players.push(req.body.userID);
+        session.playersNeeded = session.playersNeeded - 1;
+        session.playersCommitted = session.playersCommitted + 1;
+        return session.save();
+      })
+      .then(newSession => {
+        res.send(newSession);
+      });
+  });
+
   //UPDATE game session
 
   app.post("/sessions/:id", isLoggedIn, (req, res) => {

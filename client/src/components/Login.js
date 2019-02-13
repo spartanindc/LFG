@@ -43,9 +43,9 @@ class Login extends Component {
   render() {
     return (
       <div className="login-page">
-        <div class="container">
-          <div class="row">
-            <div class="col s12">
+        <div className="container">
+          <div className="row">
+            <div className="col s12">
               <h1>Login</h1>
 
               <fieldset>
