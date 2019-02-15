@@ -50,7 +50,7 @@ class GameList extends Component {
     });
 
     return (
-      <div className="gameListContainer">
+      <div className="gameListContainer col s6">
         <h4>List of games</h4>
         <button className="btn" onClick={this.toggleForm}>
           Add Game

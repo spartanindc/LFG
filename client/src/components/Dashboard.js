@@ -14,12 +14,14 @@ class Dashboard extends Component {
           <p>This is {this.props.localUserName}'s Dashboard page</p>
           <LFG />
         </div>
-        <GameList games={this.props.games} parent="dashboard" />
-        <SessionsList
-          rsvpToSession={this.props.rsvpToSession}
-          sessions={this.props.sessions}
-          parent="dashboard"
-        />
+        <div className="row">
+          <GameList games={this.props.games} parent="dashboard" />
+          <SessionsList
+            rsvpToSession={this.props.rsvpToSession}
+            sessions={this.props.sessions}
+            parent="dashboard"
+          />
+        </div>
       </div>
     );
   }

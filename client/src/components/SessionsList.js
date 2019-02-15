@@ -1,6 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import SessionForm from "./SessionForm";
+import { Link } from "react-router-dom";
 
 class SessionsList extends Component {
   state = {
@@ -22,6 +23,8 @@ class SessionsList extends Component {
       ) : (
         ""
       );
+
+    let numberOfSessions = this.props.sessions.length;
 
     let sessions = this.props.sessions.map((session, index) => (
       <div className="session collection-item" key={`session-${index}`}>
@@ -53,13 +56,18 @@ class SessionsList extends Component {
     ));
 
     return (
-      <div className="sessionListContainer">
+      <div className="sessionListContainer col s6">
         <h4>List of sessions</h4>
         <button className="btn" onClick={this.toggleForm}>
           Create Session
         </button>
         {form}
         <ul className="collection">{sessions}</ul>
+        {this.props.parent === "dashboard" ? (
+          <Link to="/sessions">View all {numberOfSessions} game sessions</Link>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
