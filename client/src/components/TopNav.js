@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 class TopNav extends Component {
   render() {
     return (
-      <nav className="navbar">
+      <nav className="navbar green">
         <a href="#" className="brand-link left">
           LFG
         </a>

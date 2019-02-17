@@ -1,0 +1,15 @@
+.home,
+.dashboard,
+.login-page,
+.signup-page {
+  font-family: "Carme", sans-serif;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.navbar {
+  font-size: 18px;
+}

@@ -42,7 +42,7 @@ class Signup extends Component {
   render() {
     return (
       <div className="signup-page">
-        <div class="container">
+        <div class="container center-align">
           <h1>Signup</h1>
           <p>Sign up and start living your best boardgaming life!!</p>
           <fieldset>
@@ -87,7 +87,7 @@ class Signup extends Component {
           <br />
 
           <p>
-            Already have an account? <a href="/login">Login</a>
+            Already have an account? <a href="/login">Login.</a>
           </p>
         </div>
       </div>

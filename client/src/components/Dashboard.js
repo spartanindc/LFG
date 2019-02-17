@@ -3,16 +3,14 @@ import { Component } from "react";
 
 import GameList from "./GameList";
 import SessionsList from "./SessionsList";
-import LFG from "./LFG";
 
 class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        <div className="top-content">
+        <div className="top-content center-align">
           <h2>Dashboard</h2>
           <p>This is {this.props.localUserName}'s Dashboard page</p>
-          <LFG />
         </div>
         <div className="row">
           <GameList games={this.props.games} parent="dashboard" />

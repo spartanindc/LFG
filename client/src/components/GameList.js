@@ -24,7 +24,12 @@ class GameList extends Component {
   }
 
   render() {
-    let form = this.state.displayCreateGameForm === true ? <AddGameForm /> : "";
+    let form =
+      this.state.displayCreateGameForm === true ? (
+        <AddGameForm toggleForm={this.toggleForm} />
+      ) : (
+        ""
+      );
 
     let numberOfGames = this.props.games.length;
 
@@ -33,17 +38,22 @@ class GameList extends Component {
     let games = this.props.games.map((game, index) => {
       if (index < max) {
         return (
-          <div className="game collection-item" key={`game-${index}`}>
-            <p>{game.gameTitle}</p>
-
-            <div className="details">
-              <p>{game.players} players.</p>
-              <p>Complexity: {game.complexity}</p>
-              <p>{game.description}</p>
+          <div
+            className={`col s12 ${
+              this.props.parent !== "dashboard" ? "m6" : ""
+            }`}
+            key={`game-${index}`}
+          >
+            <div className="card blue-grey darken-1">
+              <div className="card-content white-text">
+                <span className="card-title">{game.gameTitle}</span>
+                <p>{game.description}</p>
+                <p>Complexity: {game.complexity}</p>
+              </div>
+              <div className="card-action">
+                <span className="orange-text">{game.players} players</span>
+              </div>
             </div>
-
-            <button className="edit btn-small blue">Edit</button>
-            <button className="delete btn-small red">Delete</button>
           </div>
         );
       }
@@ -56,7 +66,7 @@ class GameList extends Component {
           Add Game
         </button>
         {form}
-        <ul className="collection">{games}</ul>
+        <ul className="row">{games}</ul>
         {this.props.parent === "dashboard" ? (
           <Link to="/games">View all {numberOfGames} games</Link>
         ) : (

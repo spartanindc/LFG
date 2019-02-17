@@ -69,6 +69,7 @@ class AddGameForm extends Component {
           description: "",
           complexity: ""
         });
+        this.props.toggleForm();
         // popup or message letting the user know that the form submitted correctly
         alert("Game Created!");
       })
