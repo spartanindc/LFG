@@ -35,16 +35,25 @@ class SessionsList extends Component {
             }`}
             key={`session-${index}`}
           >
-            <div className="card blue-grey darken-1">
+            <div className="card">
               <div className="card-content white-text">
-                <span className="card-title">
-                  {session.sessionTitle}, playing {session.game.gameTitle}
-                </span>
+                {this.props.parent === "dashboard" ? (
+                  <img
+                    src="./images/game-session.png"
+                    alt="two people playing a board game"
+                  />
+                ) : (
+                  ""
+                )}
+                <div className="center-align">
+                  <span className="title">"{session.sessionTitle}"</span>
+                  <p className="game-title">playing {session.game.gameTitle}</p>
+                </div>
+                <p>Time & Date: {session.startTimeAndDate}</p>
                 <p>{session.description}</p>
-                <p>Complexity: {session.complexity}</p>
                 <p>Looking for {session.playersNeeded} more players</p>
               </div>
-              <div className="card-action">
+              <div className="card-action center-align">
                 {this.userID === session.creator &&
                 session.playersNeeded > 0 ? (
                   <button
@@ -55,7 +64,9 @@ class SessionsList extends Component {
                     Sign up to play
                   </button>
                 ) : (
-                  ""
+                  <span className="orange-text text-lighten-1">
+                    You created this session
+                  </span>
                 )}
               </div>
             </div>
@@ -65,18 +76,30 @@ class SessionsList extends Component {
     });
 
     return (
-      <div className="sessionListContainer col s6">
-        <h4>List of sessions</h4>
-        <button className="btn" onClick={this.toggleForm}>
-          Create Session
-        </button>
+      <div className="sessionListContainer col s12 m6">
+        <div className="center-align">
+          <h4>
+            <img
+              src="./images/game-session.png"
+              alt="two people playing a board game"
+            />
+            Game Sessions
+          </h4>
+          <button className="btn" onClick={this.toggleForm}>
+            Create Session
+          </button>
+        </div>
         {form}
-        <ul className="row">{sessions}</ul>
-        {this.props.parent === "dashboard" ? (
-          <Link to="/sessions">View all {numberOfSessions} game sessions</Link>
-        ) : (
-          ""
-        )}
+        <div className="row">{sessions}</div>
+        <div className="center-align view-link">
+          {this.props.parent === "dashboard" ? (
+            <Link to="/sessions">
+              View all {numberOfSessions} game sessions
+            </Link>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     );
   }

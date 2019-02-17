@@ -105,7 +105,7 @@ class SessionForm extends Component {
   render() {
     return (
       <div className="create-session-form">
-        <div className="create-session">
+        <div className="create-session center-align">
           <fieldset>
             <legend>
               {this.state.editing ? "Edit" : "Create"} Game Session
@@ -172,7 +172,7 @@ class SessionForm extends Component {
               />
 
               <button
-                className="btn-small"
+                className="btn"
                 type="submit"
                 aria-label={
                   this.state.editing

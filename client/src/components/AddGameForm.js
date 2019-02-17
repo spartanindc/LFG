@@ -79,7 +79,7 @@ class AddGameForm extends Component {
   render() {
     return (
       <div className="create-game-form">
-        <div className="create-game">
+        <div className="create-game center-align">
           <fieldset>
             <legend>Add Game</legend>
             <form action="#" method="post" onSubmit={e => this.onSubmit(e)}>
@@ -97,6 +97,7 @@ class AddGameForm extends Component {
               <label htmlFor="minimum players">Minimum Players</label>
               <input
                 type="number"
+                min="1"
                 aria-label="minimum players"
                 name="minPlayers"
                 required
@@ -132,7 +133,7 @@ class AddGameForm extends Component {
                 value={this.state.complexity}
               />
 
-              <button type="submit" aria-label="create game">
+              <button type="submit" aria-label="create game" className="btn">
                 Add Game!
               </button>
             </form>

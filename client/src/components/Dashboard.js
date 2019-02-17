@@ -9,8 +9,8 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <div className="top-content center-align">
-          <h2>Dashboard</h2>
-          <p>This is {this.props.localUserName}'s Dashboard page</p>
+          <h1>Dashboard</h1>
+          <span>This is {this.props.localUserName}'s Dashboard page</span>
         </div>
         <div className="row">
           <GameList games={this.props.games} parent="dashboard" />

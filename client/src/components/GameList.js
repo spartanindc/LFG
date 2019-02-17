@@ -44,14 +44,26 @@ class GameList extends Component {
             }`}
             key={`game-${index}`}
           >
-            <div className="card blue-grey darken-1">
+            <div className="card">
               <div className="card-content white-text">
-                <span className="card-title">{game.gameTitle}</span>
+                {this.props.parent === "dashboard" ? (
+                  <img
+                    src="./images/game-dice.png"
+                    alt="board game smiley face"
+                  />
+                ) : (
+                  ""
+                )}
+                <div className="center-align">
+                  <span className="title">{game.gameTitle}</span>
+                </div>
                 <p>{game.description}</p>
                 <p>Complexity: {game.complexity}</p>
               </div>
-              <div className="card-action">
-                <span className="orange-text">{game.players} players</span>
+              <div className="card-action center-align">
+                <span className="orange-text text-lighten-1">
+                  {game.players} players
+                </span>
               </div>
             </div>
           </div>
@@ -60,18 +72,25 @@ class GameList extends Component {
     });
 
     return (
-      <div className="gameListContainer col s6">
-        <h4>List of games</h4>
-        <button className="btn" onClick={this.toggleForm}>
-          Add Game
-        </button>
+      <div className="gameListContainer col s12 m6">
+        <div className="center-align">
+          <h4>
+            <img src="./images/game-dice.png" alt="a red dice" />
+            Game list
+          </h4>
+          <button className="btn " onClick={this.toggleForm}>
+            Add Game
+          </button>
+        </div>
         {form}
-        <ul className="row">{games}</ul>
-        {this.props.parent === "dashboard" ? (
-          <Link to="/games">View all {numberOfGames} games</Link>
-        ) : (
-          ""
-        )}
+        <div className="row">{games}</div>
+        <div className="center-align view-link">
+          {this.props.parent === "dashboard" ? (
+            <Link to="/games">View all {numberOfGames} games</Link>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     );
   }

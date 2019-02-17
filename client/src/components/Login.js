@@ -45,13 +45,19 @@ class Login extends Component {
       <div className="login-page">
         <div className="container">
           <div className="row">
-            <div className="col s12">
+            <div className="col s12 center-align">
               <h1>Login</h1>
-
+              <div className="demo">
+                <bold>
+                  <span>Demo account</span>
+                </bold>{" "}
+                <span>Email: homer@simpson.com</span>{" "}
+                <span>Password: 123fakestreet</span>
+              </div>
               <fieldset>
                 <legend>Login</legend>
                 <form onSubmit={e => this.onSubmit(e)}>
-                  <label>Email</label>
+                  <label for="email">Email</label>
                   <input
                     type="email"
                     class="login-form"
@@ -61,7 +67,7 @@ class Login extends Component {
                     value={this.state.email}
                   />
 
-                  <label>Password</label>
+                  <label for="password">Password</label>
                   <input
                     type="password"
                     class="login-form"
@@ -76,15 +82,15 @@ class Login extends Component {
                   </button>
                 </form>
               </fieldset>
+              <div className="link-box">
+                <p>
+                  Need an account? <Link to={"/signup"}>Sign up.</Link>
+                </p>
 
-              <br />
-
-              <p>
-                Need an account? <Link to={"/signup"}>Sign up.</Link>
-              </p>
-              <p>
-                Or return <Link to={"/"}>to the beginning.</Link>
-              </p>
+                <p>
+                  Or return <Link to={"/"}>to the beginning.</Link>
+                </p>
+              </div>
             </div>
           </div>
         </div>

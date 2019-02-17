@@ -7,9 +7,112 @@
 
 .title {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
+  padding-bottom: 10px;
 }
 
 .navbar {
   font-size: 18px;
+}
+
+p,
+span {
+  padding-bottom: 10px;
+  font-size: 16px;
+}
+
+.game-title {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.view-link {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+body {
+  background-color: rgb(23, 107, 48);
+  color: white;
+}
+
+label,
+input {
+  color: inherit;
+  font-size: 14px;
+}
+
+label:active {
+  color: #b9f6ca;
+}
+input:active {
+  color: #b9f6ca;
+}
+
+.btn {
+  background-color: #00c853;
+}
+
+.start {
+  display: inline-block;
+}
+
+.first {
+  padding-right: 20px;
+}
+
+.brand-link {
+  font-weight: bold;
+  font-size: 24px;
+  padding-left: 5px;
+}
+
+.links {
+  font-weight: 500;
+}
+
+h1 {
+  font-family: "Staatliches", cursive;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 50px;
+}
+
+.card,
+nav {
+  background-color: #58a14c;
+}
+
+a {
+  color: #b9f6ca;
+}
+
+footer {
+  padding-top: 100px;
+}
+
+.demo > span {
+  display: block;
+  font-size: 12px;
+  padding: 0;
+}
+
+.demo {
+  padding-bottom: 10px;
+}
+
+.link-box > p {
+  padding: 0;
+  margin: 5px;
+}
+
+.create-game > fieldset {
+  border: solid black;
+  background-color: #58a14c;
+}
+
+.create-session > fieldset {
+  border: solid black;
+  background-color: #58a14c;
 }

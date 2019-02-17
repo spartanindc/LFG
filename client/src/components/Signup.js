@@ -43,12 +43,12 @@ class Signup extends Component {
     return (
       <div className="signup-page">
         <div class="container center-align">
-          <h1>Signup</h1>
+          <h1>Sign up</h1>
           <p>Sign up and start living your best boardgaming life!!</p>
           <fieldset>
             <legend>Sign up</legend>
             <form onSubmit={e => this.onSubmit(e)}>
-              <label for="signup-form">Create Username:</label>
+              <label for="username">Create Username:</label>
               <input
                 aria-label="user name"
                 type="text"
@@ -58,7 +58,7 @@ class Signup extends Component {
                 value={this.state.username}
               />
 
-              <label for="signup-form">Enter your email:</label>
+              <label for="email">Enter your email:</label>
               <input
                 aria-label="E-mail"
                 type="text"
@@ -68,7 +68,7 @@ class Signup extends Component {
                 value={this.state.email}
               />
 
-              <label>Create Password:</label>
+              <label for="password">Create Password:</label>
               <input
                 aria-label="password"
                 type="password"

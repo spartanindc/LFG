@@ -5,9 +5,12 @@ import { NavLink } from "react-router-dom";
 class TopNav extends Component {
   render() {
     return (
-      <nav className="navbar green">
-        <a href="#" className="brand-link left">
-          LFG
+      <nav className="navbar">
+        <a href="/" className="brand-link left">
+          <img
+            src="./images/board-game.png"
+            alt="board game with smiley face"
+          />
         </a>
         <ul className="links right">
           <li>
