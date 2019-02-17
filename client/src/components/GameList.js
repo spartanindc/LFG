@@ -76,7 +76,7 @@ class GameList extends Component {
         <div className="center-align">
           <h4>
             <img src="./images/game-dice.png" alt="a red dice" />
-            Game list
+            Games List
           </h4>
           <button className="btn " onClick={this.toggleForm}>
             Add Game

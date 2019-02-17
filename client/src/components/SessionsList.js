@@ -51,10 +51,13 @@ class SessionsList extends Component {
                 </div>
                 <p>Time & Date: {session.startTimeAndDate}</p>
                 <p>{session.description}</p>
-                <p>Looking for {session.playersNeeded} more players</p>
+                <p>
+                  Looking for {session.playersNeeded} more{" "}
+                  {session.playersNeeded < 2 ? "player" : "players"}{" "}
+                </p>
               </div>
               <div className="card-action center-align">
-                {this.userID === session.creator &&
+                {this.props.user !== session.creator &&
                 session.playersNeeded > 0 ? (
                   <button
                     className="btn"

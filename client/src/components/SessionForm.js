@@ -96,6 +96,7 @@ class SessionForm extends Component {
           editing: false,
           sessionId: ""
         });
+        this.props.toggleForm();
         // popup or message letting the user know that the form submitted correctly
         alert("Game Session Created!");
       })

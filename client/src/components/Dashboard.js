@@ -17,6 +17,7 @@ class Dashboard extends Component {
           <SessionsList
             rsvpToSession={this.props.rsvpToSession}
             sessions={this.props.sessions}
+            user={this.props.localUser}
             parent="dashboard"
           />
         </div>
