@@ -8,6 +8,7 @@ import Dashboard from "./Dashboard";
 import Home from "./Home";
 import SessionsList from "./SessionsList";
 import GameList from "./GameList";
+import NotFound from "./NotFound";
 
 import TopNav from "./TopNav";
 
@@ -151,6 +152,7 @@ class App extends Component {
             )}
           />
         </div>
+
         {this.state.isLoggedIn ? (
           <div className="dash-content">
             <Route

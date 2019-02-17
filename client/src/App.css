@@ -81,7 +81,7 @@ h1 {
 
 .card,
 nav {
-  background-color: #58a14c;
+  background-color: #368c3c;
 }
 
 a {
@@ -109,10 +109,10 @@ footer {
 
 .create-game > fieldset {
   border: solid black;
-  background-color: #58a14c;
+  background-color: #368c3c;
 }
 
 .create-session > fieldset {
   border: solid black;
-  background-color: #58a14c;
+  background-color: #368c3c;
 }
