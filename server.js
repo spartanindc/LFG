@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 //Express Setup
-app.use(express.static("public"));
+//app.use(express.static("public"));
 app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(
@@ -33,6 +33,10 @@ app.use(flash());
 
 const configDB = require("./config/database.js");
 mongoose.connect(configDB.url);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 //Routing
 require("./api/routes/routes.js")(app, passport);
