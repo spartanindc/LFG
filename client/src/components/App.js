@@ -174,7 +174,7 @@ class App extends Component {
                   {...props}
                   {...this.state}
                   hydrateState={() => this.hydrateState()}
-                  rsvpToSession={this.rsvpToSession()}
+                  rsvpToSession={() => this.rsvpToSession()}
                 />
               )}
             />
