@@ -29,10 +29,18 @@ class SessionsList extends Component {
     let max = this.props.parent === "dashboard" ? 5 : this.props.games.length;
 
     let sessions = this.props.sessions.map((session, index) => {
+      //Convert date and time string to something easier to read
       let eventTiming = session.startTimeAndDate;
       let date = new Date(eventTiming);
       let dateAndTime =
         date.toDateString() + " at " + date.toLocaleTimeString();
+
+      //check if user has already joined a sesssion to determine what to display
+      let committedPlayers = session.players;
+      let playerSet = new Set(committedPlayers);
+      let user = this.props.user;
+      console.log(playerSet.has(user));
+
       if (index < max) {
         return (
           <div
@@ -63,8 +71,8 @@ class SessionsList extends Component {
                 </p>
               </div>
               <div className="card-action center-align">
-                {this.props.user !== session.creator &&
-                session.playersNeeded > 0 ? (
+                {user !== session.creator ||
+                (playerSet.has(user) && session.playersNeeded > 0) ? (
                   <button
                     className="btn"
                     type="button"

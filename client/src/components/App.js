@@ -32,15 +32,7 @@ class App extends Component {
     });
   }
 
-  //Button functionality
-  detailsBtn = () => {};
-
-  editBtn = () => {};
-
-  deleteBtn = () => {};
-
   rsvpToSession(sessionId) {
-    // fetch call using sessionId & this.state.localUser
     console.log(`${this.state.localUser} RSVPd to ${sessionId}`);
     fetch("/rsvp", {
       method: "POST",
@@ -58,6 +50,7 @@ class App extends Component {
         fetch("/sessions").then(res => {
           res.json().then(sessionData => {
             this.setState({ sessions: sessionData });
+            alert(`You have joined the game session!`);
           });
         });
 
@@ -67,7 +60,6 @@ class App extends Component {
           });
         });
       });
-    // in call back, fetch sessions and setState again
   }
 
   componentDidMount() {
