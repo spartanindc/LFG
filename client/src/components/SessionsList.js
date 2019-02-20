@@ -25,8 +25,14 @@ class SessionsList extends Component {
       );
 
     let numberOfSessions = this.props.sessions.length;
+
     let max = this.props.parent === "dashboard" ? 5 : this.props.games.length;
+
     let sessions = this.props.sessions.map((session, index) => {
+      let eventTiming = session.startTimeAndDate;
+      let date = new Date(eventTiming);
+      let dateAndTime =
+        date.toDateString() + " at " + date.toLocaleTimeString();
       if (index < max) {
         return (
           <div
@@ -49,7 +55,7 @@ class SessionsList extends Component {
                   <span className="title">"{session.sessionTitle}"</span>
                   <p className="game-title">playing {session.game.gameTitle}</p>
                 </div>
-                <p>Time & Date: {session.startTimeAndDate}</p>
+                <p>Time & Date: {dateAndTime}</p>
                 <p>{session.description}</p>
                 <p>
                   Looking for {session.playersNeeded} more{" "}
