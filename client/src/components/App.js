@@ -8,7 +8,6 @@ import Dashboard from "./Dashboard";
 import Home from "./Home";
 import SessionsList from "./SessionsList";
 import GameList from "./GameList";
-import NotFound from "./NotFound";
 
 import TopNav from "./TopNav";
 
@@ -175,7 +174,7 @@ class App extends Component {
                   {...props}
                   {...this.state}
                   hydrateState={() => this.hydrateState()}
-                  rsvpToSession={this.rsvpToSession}
+                  rsvpToSession={this.rsvpToSession()}
                 />
               )}
             />
