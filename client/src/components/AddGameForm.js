@@ -20,8 +20,8 @@ class AddGameForm extends Component {
       // fetch request to get the details of that session
       this.setState({
         editing: true,
-        gameTitle: "", //{this.state.session.sessionTitle},
-        gameId: "" //{this.state.sesssion._id}
+        gameTitle: "",
+        gameId: ""
       });
     }
   }

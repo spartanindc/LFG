@@ -42,7 +42,7 @@ class Signup extends Component {
   render() {
     return (
       <div className="signup-page">
-        <div class="container center-align">
+        <div className="container center-align">
           <h1>Sign up</h1>
           <p>Sign up and start living your best boardgaming life!!</p>
           <fieldset>
@@ -52,7 +52,7 @@ class Signup extends Component {
               <input
                 aria-label="user name"
                 type="text"
-                class="signup-form"
+                className="signup-form"
                 name="username"
                 onChange={e => this.onChange(e)}
                 value={this.state.username}
@@ -62,7 +62,7 @@ class Signup extends Component {
               <input
                 aria-label="E-mail"
                 type="text"
-                class="signup-form"
+                className="signup-form"
                 name="email"
                 onChange={e => this.onChange(e)}
                 value={this.state.email}
@@ -72,13 +72,17 @@ class Signup extends Component {
               <input
                 aria-label="password"
                 type="password"
-                class="signup-form"
+                className="signup-form"
                 name="password"
                 onChange={e => this.onChange(e)}
                 value={this.state.password}
               />
 
-              <button aria-label="submit signup form" type="submit" class="btn">
+              <button
+                aria-label="submit signup form"
+                type="submit"
+                className="btn"
+              >
                 Signup
               </button>
             </form>

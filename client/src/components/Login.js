@@ -60,7 +60,7 @@ class Login extends Component {
                   <label for="email">Email</label>
                   <input
                     type="email"
-                    class="login-form"
+                    className="login-form"
                     name="email"
                     required
                     onChange={e => this.onChange(e)}
@@ -70,7 +70,7 @@ class Login extends Component {
                   <label for="password">Password</label>
                   <input
                     type="password"
-                    class="login-form"
+                    className="login-form"
                     name="password"
                     required
                     onChange={e => this.onChange(e)}

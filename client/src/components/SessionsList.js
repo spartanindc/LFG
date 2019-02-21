@@ -72,7 +72,7 @@ class SessionsList extends Component {
               </div>
               <div className="card-action center-align">
                 {user !== session.creator ||
-                (playerSet.has(user) && session.playersNeeded > 0) ? (
+                (playerSet.has(user) === false && session.playersNeeded > 0) ? (
                   <button
                     className="btn"
                     type="button"

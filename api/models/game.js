@@ -16,11 +16,6 @@ const gameSchema = mongoose.Schema({
 });
 
 gameSchema.virtual("players").get(function() {
-  /*
-if (${this.minPlayers} == ${this.maxPlayers}) {
-    return `Must have ${this.maxPlayers}`;
-  }*/
-
   return `${this.minPlayers} to ${this.maxPlayers}`;
 });
 
@@ -31,7 +26,6 @@ gameSchema.methods.serialize = function() {
     players: this.players,
     description: this.description,
     complexity: this.complexity
-    //user: this.user.username
   };
 };
 

@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 //Express Setup
-//app.use(express.static("public"));
+
 app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(
