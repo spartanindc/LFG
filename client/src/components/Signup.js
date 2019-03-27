@@ -31,7 +31,6 @@ class Signup extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         localStorage.setItem("userID", res._id);
         this.props.hydrateState();
         this.props.history.push("/dashboard");
@@ -54,6 +53,7 @@ class Signup extends Component {
                 type="text"
                 className="signup-form"
                 name="username"
+                autocomplete="username"
                 onChange={e => this.onChange(e)}
                 value={this.state.username}
               />
@@ -64,6 +64,7 @@ class Signup extends Component {
                 type="text"
                 className="signup-form"
                 name="email"
+                autocomplete="email"
                 onChange={e => this.onChange(e)}
                 value={this.state.email}
               />
@@ -74,6 +75,7 @@ class Signup extends Component {
                 type="password"
                 className="signup-form"
                 name="password"
+                autocomplete="new-password"
                 onChange={e => this.onChange(e)}
                 value={this.state.password}
               />

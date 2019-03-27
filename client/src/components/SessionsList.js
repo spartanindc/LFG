@@ -39,7 +39,6 @@ class SessionsList extends Component {
       let committedPlayers = session.players;
       let playerSet = new Set(committedPlayers);
       let user = this.props.user;
-      console.log(playerSet.has(user));
 
       if (index < max) {
         return (

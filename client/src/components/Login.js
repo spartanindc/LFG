@@ -62,6 +62,7 @@ class Login extends Component {
                     type="email"
                     className="login-form"
                     name="email"
+                    autocomplete="email"
                     required
                     onChange={e => this.onChange(e)}
                     value={this.state.email}
@@ -72,6 +73,7 @@ class Login extends Component {
                     type="password"
                     className="login-form"
                     name="password"
+                    autocomplete="current-password"
                     required
                     onChange={e => this.onChange(e)}
                     value={this.state.password}

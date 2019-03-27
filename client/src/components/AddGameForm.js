@@ -27,7 +27,6 @@ class AddGameForm extends Component {
   }
 
   onChange(e) {
-    console.log("here", e.target.getAttribute("name"), e.target.value);
     let key = e.target.getAttribute("name");
     this.setState({
       [key]: e.target.value
@@ -36,7 +35,6 @@ class AddGameForm extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(e.currentTarget.gameTitle.value);
 
     let postBody = {
       gameTitle: this.state.gameTitle,
