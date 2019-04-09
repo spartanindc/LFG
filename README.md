@@ -12,6 +12,10 @@ Looking For Gamers or "LFG" is an app to help those looking for fellow gamers to
 
 ![Dashboard](images/dashboard.png)
 
+## API Documentation
+
+[API Docs](https://app.swaggerhub.com/apis-docs/spartanindc/LFG/1.0.0)
+
 ## Technology used
 
 -React
